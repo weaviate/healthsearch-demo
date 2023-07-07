@@ -2,14 +2,6 @@
 
 The Healthsearch Demo is a React application powered by Next.js, which enables you to search and display supplement products interactively. This document provides setup instructions for the frontend, component details, and maintenance procedures.
 
-## Table of Contents
-
-- [Getting Started](#getting-started)
-- [Product Schema](#product-schema)
-- [Code Maintenance](#code-maintenance)
-- [Styling](#styling)
-- [Component Documentation](#component-documentation)
-
 ## 🚀 Getting Started
 
 Follow these steps to set up the frontend:

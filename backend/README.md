@@ -73,7 +73,7 @@ Inside the backend folder, use these commands:
 - ```export OPENAI_API_KEY="your-openai-api-key"```
 > You can use `.env` files (https://github.com/theskumar/python-dotenv) or set the variables to your system
 > Note that if you're using the GPT-4 model (by default), ensure your OpenAI key has access.
-> Make sure that the Weaviate Key is empty and the Weaviate URL is set to `http://localhost:8080`
+> Make sure that the Weaviate Key is empty and the Weaviate URL is set to `http://weaviate:8080`
 
 2. **Run docker compose** 
 -`docker-compose -f weaviate-docker-compose.yml up -d`

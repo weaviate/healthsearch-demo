@@ -10,7 +10,7 @@ Welcome to the Healthsearch Demo, an open-source project aimed at showcasing the
 
 The search functionality in this demo accepts natural language queries that are translated into GraphQL queries using LLMs. These GraphQL queries are then utilized to retrieve supplements from a Weaviate database. The demo also exhibits an example of generative search by providing product summaries generated based on the retrieved objects.
 
-> ⚠️ **Disclaimer**: Health Search Demo is a technical demonstration, and the results shown should not be treated as health advice. The results and generated summaries are purely based on user-written reviews.
+> ⚠️ **Disclaimer**: Healthsearch is a technical demonstration, and the results shown should not be treated as health advice. The results and generated summaries are purely based on user-written reviews.
 
 ## 🔧 Template
 
@@ -18,7 +18,7 @@ This repository is designed to serve as a template - a starting point for your o
 
 ## 🛠️ Project Structure
 
-The Health Search Demo is structured in three main components:
+The Healthsearch Demo is structured in three main components:
 
 1. A Weaviate database (either cluster hosted on WCS or local).
 2. A FastAPI endpoint facilitating communication between the LLM provider and database.
@@ -39,20 +39,20 @@ You can use Docker to setup the demo in one line of code! If you're not familiar
 1. **Use docker compose**
 -  `docker-compose up`
 
-2. **Open the demo with**
+2. **You can access the frontend through:**
 - `localhost:3000`
 
 
 ## 📚 Getting Started
 
-To kick-start with the Health Search Demo, please refer to the READMEs in the `Frontend` and `Backend` folders:
+To kick-start with the Healthsearch Demo, please refer to the READMEs in the `Frontend` and `Backend` folders:
 
 - [Frontend README](./frontend/README.md)
 - [Backend README](./backend/README.md)
 
 ## 💡 Usage
 
-Follow these steps to use the Health Search Demo:
+Follow these steps to use the Healthsearch Demo:
 
 1. Set up the Weaviate database, FastAPI backend, and the React frontend by following the instructions in their respective READMEs.
 2. Launch the database, backend server, and the frontend application.
