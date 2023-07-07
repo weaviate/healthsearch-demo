@@ -1,0 +1,10 @@
+typer
+wasabi
+pathlib
+black
+fastapi
+uvicorn
+openai
+weaviate-client
+mypy
+python-dotenv

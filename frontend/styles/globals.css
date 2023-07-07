@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.table-container {
+    transition: transform 0.2s ease-in-out;
+}
+
+.table-container:hover {
+    transform: scale(1.02);
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.3);
+    }
+
+    60% {
+        transform: scale(1.025);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes popInLate {
+    0% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(0);
+    }
+
+    80% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes popInMoreLate {
+    0% {
+        transform: scale(0);
+    }
+
+    60% {
+        transform: scale(0);
+    }
+
+    75% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animate-pop-in {
+    animation: popIn 0.5s ease-out;
+}
+
+.animate-pop-in-late {
+    animation: popInLate 0.5s ease-out;
+}
+
+.animate-pop-more-late {
+    animation: popInMoreLate 0.9s ease-out;
+}
+
+.rounded-indicator {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.neon-text {
+    background: linear-gradient(
+        -45deg,
+        #ff0000,
+        #ff7f00,
+        #ffff00,
+        #00ff00,
+        #00ffff,
+        #0000ff,
+        #8b00ff,
+        #ff0000
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: neonGradient 10s ease infinite;
+}
+
+@keyframes neonGradient {
+    0% {
+        background-position: 25% 50%;
+    }
+
+    50% {
+        background-position: 100% 75%;
+    }
+
+    100% {
+        background-position: 25% 50%;
+    }
+}
+
+.annotation {
+    background-color: #48bb78;
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    color: red;
+}
+
+.rive-container {
+    min-height: 200px;
+    width: 100%;
+    margin: 0 auto;
+}
