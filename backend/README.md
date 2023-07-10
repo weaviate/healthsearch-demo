@@ -28,15 +28,15 @@ The backend expects the data to be in this format:
     }
 }
 ```
-> For annotation functionality in the frontend, encapsulate keywords to be highlighted like so: `<span className='annotation'> Keyword </span>`. This needs to be applied to the review field.
+> For annotation functionality your own dataset in the frontend, encapsulate keywords like so: `<span className='annotation'> Keyword </span>`. This needs to be applied to the review field.
 
 ## 📦 Setup & Requirements
 
 The following steps guide you through setting up the backend:
 
 1. **Set up your Weaviate cluster:**
-- Create a cluster in WCS (for more details, refer to the [Weaviate Cluster Setup Guide](https://weaviate.io/developers/wcs/guides/create-instance))
-- (ALTERNATIVE) Use Docker-Compose to setup a cluster locally. Go to the Docker Setup section to learn more.
+- **OPTION 1** Create a cluster in WCS (for more details, refer to the [Weaviate Cluster Setup Guide](https://weaviate.io/developers/wcs/guides/create-instance))
+- **OPTION 2** Use Docker-Compose to setup a cluster locally [Weaviate Docker Guide](https://weaviate.io/developers/weaviate/installation/docker-compose)
 
 2. **Set environment variables:**
 - The following environment variables need to be set

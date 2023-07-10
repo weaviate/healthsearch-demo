@@ -32,14 +32,14 @@ You can use Docker to setup the demo in one line of code! If you're not familiar
 
 1. **Set environment variables:**
 - The following environment variables need to be set
-- ```export OPENAI_API_KEY="your-openai-api-key"```
-> You can use the `.env` file inside the backend folder (https://github.com/theskumar/python-dotenv) or set the variables to your system
+- ```OPENAI_API_KEY=your-openai-api-key```
+> Use the `.env` file inside the backend folder to set the variable (https://github.com/theskumar/python-dotenv)
 > Note that if you're using the GPT-4 model (by default), ensure your OpenAI key has access.
 
 1. **Use docker compose**
 -  `docker-compose up`
 
-2. **You can access the frontend through:**
+2. **Access the frontend on:**
 - `localhost:3000`
 
 
