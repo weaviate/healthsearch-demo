@@ -99,10 +99,7 @@ export default function Home() {
                     <div className="bg-black text-white lg:p-6 md:p-3 sm:p-3 rounded shadow-lg text-center border-2 border-dashed border-yellow-500 lg:w-2/6 md:1/2 sm:1/2 sm:mx-3">
                         <h2 className="lg:text-2xl mb-4">⚠️ Please note</h2>
                         <p className="mb-6">
-                            HealthSearch is a technical demonstration and
-                            presents one of many usecases with Weaviate. The
-                            results shown are based on user-written reviews and
-                            should not be taken as health advice.
+                            Healthsearch is NOT intended to give any health advice. All results are purely based on the content of user-written reviews. Healthsearch is a technical demonstration that presents a proof of concept for one of many usecases with Weaviate. Please ask a medical professional before taking any supplements for your condition.
                         </p>
                         <button
                             onClick={() => setIsModalOpen(false)}

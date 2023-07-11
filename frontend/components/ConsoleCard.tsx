@@ -76,7 +76,7 @@ const ConsoleCard: React.FC<ConsoleCardProps> = ({ onSend, loading }) => {
                         {showTooltip && (
                             <div className="absolute bottom-full left-0 text-xs bg-slate-700 text-white font-mono p-3 w-60 rounded z-50 mb-2 shadow-lg">
                                 Search for products with specific health
-                                effects. Press Generate to create a GraphQL
+                                effects based on user-written reviews. Press Generate to create a GraphQL
                                 Query. Use the generated query to retrieve a
                                 list of products, which you can select for more
                                 information.

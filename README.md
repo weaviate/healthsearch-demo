@@ -58,8 +58,8 @@ Follow these steps to use the Healthsearch Demo:
 2. Launch the database, backend server, and the frontend application.
 3. Use the interactive frontend to input your natural language query related to a health condition or benefit.
 4. The frontend sends the query to the backend, which transforms the natural language query into a GraphQL query using the LLM.
-5. The backend sends the GraphQL query to the Weaviate database to fetch relevant products and reviews.
-6. The frontend displays the results, allowing you to explore the most suitable supplements for your specific health-related query.
+5. The backend sends the GraphQL query to the Weaviate database to fetch relevant reviews based on the user query.
+6. The frontend displays the results, allowing you to explore the most semantic-related supplements to your specific health-related query.
 
 ## 💖 Open Source Contribution
 

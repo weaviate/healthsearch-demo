@@ -91,21 +91,11 @@ const SidebarCard: React.FC<SidebarCardProps> = ({
                                 <div className="w-full lg:w-full md:w-3/4 sm:w-1/2">
                                     <p className="text-sm font-mono bg-black bg-opacity-10 p-3 shadow-lg rounded-lg">
                                         {' '}
-                                        Welcome to HealthSearch! Convert natural
-                                        language to a GraphQL query to search
-                                        for products with specific health
-                                        effects. The demo uses generative search
-                                        to further enhance the results by
-                                        providing summaries about the products
-                                        and reviews.
+                                        Welcome to Healthsearch! Convert natural language to a GraphQL query to search for supplements with specific health effects based on user-written reviews. The demo uses generative search to further enhance the results by providing product and review summaries.
                                     </p>
                                     {/* Disclaimer */}
                                     <p className="text-xs text-slate-400 hover:text-white mt-2 font-mono bg-black bg-opacity-10 border-2 border-dashed border-zinc-600 table-container hover:border-yellow-400 p-3 shadow-lg rounded-lg">
-                                        Results are based on user-written
-                                        reviews and should NOT be taken as
-                                        health advice. HealthSearch is a
-                                        technical demonstration and presents one
-                                        of many usecases for Weaviate.
+                                        Healthsearch is NOT intended to give any health advice, all results are purely based on user-written reviews. Healthsearch is a technical demonstration and presents a proof of concept for one of many possible usecases for Weaviate.
                                     </p>
                                 </div>
                                 {/* Display API and version status */}
