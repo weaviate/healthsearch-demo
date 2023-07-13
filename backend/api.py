@@ -344,7 +344,7 @@ def check_cache(cache_results: dict, natural_query: str, max_distance: float) ->
                 f'Retrieved similar results (distance {results["data"]["Get"]["CachedResult"][0]["_additional"]["distance"]})'
             )
             results["data"]["Get"]["CachedResult"][0]["summary"] = (
-                f"⭐ RETURNED SIMILAR RESULTS FROM QUERY '{natural_query}' ({round(results['data']['Get']['CachedResult'][0]['_additional']['distance'],2)}) : "
+                f"⭐ RETURNED SIMILAR RESULTS FROM QUERY '{results['data']['Get']['CachedResult'][0]['naturalQuery']}' ({round(results['data']['Get']['CachedResult'][0]['_additional']['distance'],2)}) : "
                 + results["data"]["Get"]["CachedResult"][0]["summary"]
             )
             return results
