@@ -201,9 +201,7 @@ You are a parser that understands the meaning of natural language queries and pa
 # FastAPI App
 app = FastAPI()
 
-origins = [
-    "http://localhost:3000",
-]
+origins = ["http://localhost:3000", "https://healthsearch-frontend.onrender.com"]
 
 # Add middleware for handling Cross Origin Resource Sharing (CORS)
 app.add_middleware(

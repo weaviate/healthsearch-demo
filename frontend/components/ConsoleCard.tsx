@@ -125,7 +125,7 @@ const ConsoleCard: React.FC<ConsoleCardProps> = ({ onSend, loading, cachedQuerie
                     </div>
                 </div>
                 <div className="text-center text-xs mt-2 font-mono text-zinc-500">
-                    Saved queries: {allSuggestions.length}
+                    Saved queries: {cachedQueries.length}
                 </div>
                 {/* Button for showing the tooltip and sending the input value */}
                 <div className="flex justify-between pt-5">
