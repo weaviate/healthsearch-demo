@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 13.07.2023
+
+### Added
+- [x] Display saved cached queries to select from
+- [x] Return whether results was cached (direct match, similarity match) or generated
+
+### Fixed
+- [x] Adjusted threshhold for semantic cache
+- [x] Improved product schema for weaviate 
+
 ## [1.0.0] - 03.07.2023
 
 ### Added 

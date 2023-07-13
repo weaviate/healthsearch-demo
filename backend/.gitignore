@@ -17,3 +17,5 @@ dataset.json
 working_env
 _archive
 .mypy_cache
+key
+data_generation

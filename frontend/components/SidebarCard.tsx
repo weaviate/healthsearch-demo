@@ -17,6 +17,7 @@ interface SidebarCardProps {
     isSidebarCollapsed: boolean;
     requests: number;
     cached: number;
+    cachedQueries: string[],
 }
 
 // Define the SidebarCard functional component
@@ -29,7 +30,8 @@ const SidebarCard: React.FC<SidebarCardProps> = ({
     onBack,
     isSidebarCollapsed,
     requests,
-    cached
+    cached,
+    cachedQueries
 }) => {
     // Styles for the global scrollbar
     const scrollBarStyles = `
@@ -82,7 +84,7 @@ const SidebarCard: React.FC<SidebarCardProps> = ({
                                 <a className='cursor-pointer transform transition duration-500 ease-in-out hover:scale-150' href="https://www.weaviate.io" target="_blank" rel="noreferrer">
                                     <img src="/weaviate-icon.png" alt="Weaviate" className="w-8 h-8 mx-2 cursor-pointer" />
                                 </a>
-                                <a className='cursor-pointer transform transition duration-500 ease-in-out hover:scale-150' href="https://github.com/weaviate" target="_blank" rel="noreferrer">
+                                <a className='cursor-pointer transform transition duration-500 ease-in-out hover:scale-150' href="https://github.com/weaviate/healthsearch-demo" target="_blank" rel="noreferrer">
                                     <img src="/github-icon.png" alt="Github" className="w-8 h-8 mx-2 cursor-pointer" />
                                 </a>
                             </div>
@@ -112,14 +114,14 @@ const SidebarCard: React.FC<SidebarCardProps> = ({
                                         Demo {apiStatus}
                                     </span>
                                     <span className="rounded-indicator neon-text">
-                                        v1.0.0
+                                        v1.1.0
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {/* ConsoleCard for sending queries */}
-                    <ConsoleCard onSend={onSend} loading={loading} />
+                    <ConsoleCard onSend={onSend} loading={loading} cachedQueries={cachedQueries} />
                     {/* QueryCard for displaying transformed query */}
                     <QueryCard transformedQuery={transformedQuery} />
                 </>
@@ -129,7 +131,6 @@ const SidebarCard: React.FC<SidebarCardProps> = ({
             )}
             <div className="my-4 text-xs text-white font-mono flex justify-center">
                 <span className='rounded-indicator neon-text'>Total Requests: {requests}</span>
-                <span className='rounded-indicator neon-text ml-4'>Saved in Cache: {cached}</span>
             </div>
         </div>
     );

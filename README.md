@@ -2,7 +2,7 @@
 
 Welcome to the Healthsearch Demo, an open-source project aimed at showcasing the potential of leveraging user-written reviews and queries to retrieve supplement products based on specific health effects. 
 
-[![Weaviate](https://img.shields.io/static/v1?label=%E2%9D%A4%20made%20with&message=Weaviate&color=green&style=flat-square)](https://weaviate.io/) [![Docker support](https://img.shields.io/badge/Docker_support-%E2%9C%93-4c1?style=flat-square&logo=docker&logoColor=white)](https://docs.docker.com/get-started/) [![Demo](https://img.shields.io/badge/Check%20out%20the%20demo!-blue?&style=flat-square&logo=react&logoColor=white)](https://healthsearch-frontend.onrender.com/) [![Weaviate](https://img.shields.io/static/v1?label=version&message=v1.0&color=pink&style=flat-square)](https://weaviate.io/)
+[![Weaviate](https://img.shields.io/static/v1?label=%E2%9D%A4%20made%20with&message=Weaviate&color=green&style=flat-square)](https://weaviate.io/) [![Docker support](https://img.shields.io/badge/Docker_support-%E2%9C%93-4c1?style=flat-square&logo=docker&logoColor=white)](https://docs.docker.com/get-started/) [![Demo](https://img.shields.io/badge/Check%20out%20the%20demo!-blue?&style=flat-square&logo=react&logoColor=white)](https://healthsearch-frontend.onrender.com/) [![Weaviate](https://img.shields.io/static/v1?label=version&message=v1.1&color=pink&style=flat-square)](https://weaviate.io/)
 
 ![Demo of Health Search](https://github.com/weaviate/healthsearch-demo/blob/main/frontend/public/Intro.gif)
 
