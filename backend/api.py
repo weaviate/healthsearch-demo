@@ -285,10 +285,11 @@ def get_cache(natural_query: str) -> dict:
         .do()
     )
 
-    if natural_query == results["data"]["Get"]["CachedResult"][0]["naturalQuery"]:
-        return results
-    else:
-        return {"data": {"Get": {"CachedResult": []}}}
+    if results["data"]["Get"]["CachedResult"]:
+        if natural_query == results["data"]["Get"]["CachedResult"][0]["naturalQuery"]:
+            return results
+
+    return {"data": {"Get": {"CachedResult": []}}}
 
 
 def get_cache_count() -> list:
