@@ -225,7 +225,7 @@ def handle_results(results: dict) -> list:
             query_results = data[key]["Product"]
             for query_result in query_results:
                 # Add hard filter
-                if len(query_result.get("reviews", [])) > 2:
+                if len(query_result.get("reviews", [])) >= 5:
                     end_results.append(
                         {
                             "brand": query_result.get("brand", "No brand"),
@@ -350,7 +350,7 @@ def check_cache(cache_results: dict, natural_query: str, max_distance: float) ->
                 f'Retrieved similar results (distance {results["data"]["Get"]["CachedResult"][0]["_additional"]["distance"]})'
             )
             results["data"]["Get"]["CachedResult"][0]["summary"] = (
-                f"⭐ RETURNED SIMILAR RESULTS FROM QUERY '{results['data']['Get']['CachedResult'][0]['naturalQuery']}' ({round(results['data']['Get']['CachedResult'][0]['_additional']['distance'],2)}) : "
+                f"⭐ RETURNED SIMILAR CACHED RESULTS FROM QUERY '{results['data']['Get']['CachedResult'][0]['naturalQuery']}' ({round(results['data']['Get']['CachedResult'][0]['_additional']['distance'],2)}) : "
                 + results["data"]["Get"]["CachedResult"][0]["summary"]
             )
             return results

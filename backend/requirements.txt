@@ -5,6 +5,6 @@ black
 fastapi
 uvicorn
 openai
-weaviate-client==3.22.0
+weaviate-client
 mypy
 python-dotenv
