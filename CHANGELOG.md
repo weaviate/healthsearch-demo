@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - [x] Adjusted threshhold for semantic cache
 - [x] Improved product schema for weaviate 
+- [x] Hard filtering based on review count to reduce noise
 
 ## [1.0.0] - 03.07.2023
 

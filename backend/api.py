@@ -224,25 +224,27 @@ def handle_results(results: dict) -> list:
         for key in data:
             query_results = data[key]["Product"]
             for query_result in query_results:
-                end_results.append(
-                    {
-                        "brand": query_result.get("brand", "No brand"),
-                        "name": query_result.get("name", "No name"),
-                        "rating": query_result.get("rating", 0.0),
-                        "ingredients": query_result.get("ingredients", ""),
-                        "description": query_result.get("description", ""),
-                        "summary": query_result.get("summary", ""),
-                        "effects": query_result.get("effects", ""),
-                        "reviews": query_result.get("reviews", []),
-                        "image": query_result.get("image", ""),
-                        "distance": round(
-                            query_result.get("_additional", {"distance": 0})[
-                                "distance"
-                            ],
-                            2,
-                        ),
-                    }
-                )
+                # Add hard filter
+                if len(query_result.get("reviews", [])) > 2:
+                    end_results.append(
+                        {
+                            "brand": query_result.get("brand", "No brand"),
+                            "name": query_result.get("name", "No name"),
+                            "rating": query_result.get("rating", 0.0),
+                            "ingredients": query_result.get("ingredients", ""),
+                            "description": query_result.get("description", ""),
+                            "summary": query_result.get("summary", ""),
+                            "effects": query_result.get("effects", ""),
+                            "reviews": query_result.get("reviews", []),
+                            "image": query_result.get("image", ""),
+                            "distance": round(
+                                query_result.get("_additional", {"distance": 0})[
+                                    "distance"
+                                ],
+                                2,
+                            ),
+                        }
+                    )
         return end_results
 
     except Exception as e:
@@ -273,7 +275,7 @@ def get_cache(natural_query: str) -> dict:
     filter = {
         "path": ["naturalQuery"],
         "operator": "Equal",
-        "valueText": natural_query,
+        "valueText": str(natural_query),
     }
 
     results = (
@@ -284,6 +286,10 @@ def get_cache(natural_query: str) -> dict:
         .with_limit(1)
         .do()
     )
+
+    if "errors" in results:
+        msg.warn(f"Error in get_cache: {results}")
+        return {"data": {"Get": {"CachedResult": []}}}
 
     if results["data"]["Get"]["CachedResult"]:
         if natural_query == results["data"]["Get"]["CachedResult"][0]["naturalQuery"]:
@@ -505,10 +511,12 @@ async def generate_query(payload: NLQuery):
     """
     global request_count
     request_count += 1
-    start_prompt = f"Convert this natural language to a GraphQL Query and only return the query, it will be directly used: {payload.text}"
+    query_text = payload.text.strip().lower()
+
+    start_prompt = f"Convert this natural language to a GraphQL Query and only return the query, it will be directly used: {query_text}"
 
     # Easter Egg
-    if payload.text.lower() == "easteregg":
+    if query_text == "easteregg":
         return JSONResponse(
             content={
                 "query": "🚀 Congratulations, you rolled the demo!",
@@ -518,7 +526,7 @@ async def generate_query(payload: NLQuery):
         )
 
     # Cache Retrieval
-    results = check_cache(get_cache(payload.text.lower()), payload.text.lower(), 0.14)
+    results = check_cache(get_cache(query_text), query_text, 0.14)
 
     if len(results) > 0:
         products = json.loads(results["data"]["Get"]["CachedResult"][0]["products"])
@@ -573,9 +581,7 @@ async def generate_query(payload: NLQuery):
 
                 results = handle_results(results)  # type: ignore[assignment]
 
-                generative_query = modify_graphql(
-                    str(content), payload.text, data_fields
-                )
+                generative_query = modify_graphql(str(content), query_text, data_fields)
                 generative_results = client.query.raw(str(generative_query))
 
                 if "errors" in generative_results:
@@ -603,7 +609,7 @@ async def generate_query(payload: NLQuery):
                     )
 
                 add_cache(
-                    payload.text.lower(),
+                    query_text,
                     "".join(
                         [
                             str(content) + "\n\n",
