@@ -12,6 +12,24 @@ The search functionality in this demo accepts natural language queries that are 
 
 > ⚠️ **Disclaimer**: Healthsearch is a technical demonstration, and the results shown should not be treated as health advice. The results and generated summaries are purely based on user-written reviews.
 
+### 💡 Natural Language Translation to GraphQL
+
+We use Large Language Models (LLM), like GPT4, to translate natural language queries into a structured query format, called a GraphQL query.
+The demo extracts information about filters, sorting, and limits directly from the context of the query. Whether the query is `the top 10 products for glowing skin`, `products for sleep from a specific brand`, or `best-rated products for toothache`, the demo can interpret these queries and generate an appropriate GraphQL query in return.
+
+### 🔎 Semantic Search
+
+Healthsearch relies on the power of semantic search in user reviews. When seeking products that are `good for joint pain`, for instance, Healthsearch scans user reviews for discussions on products that have alleviated joint pain or similar conditions. The results are then aggregated and grouped according to their respective products.
+
+### 💥 Generative Search
+
+After the translation of the query to GraphQL and the retrieval of the most semantically relevant product, we enhance our demo with a feature called `Generative Search`. Essentially, we examine the top five results and employ an LLM to generate a product summary. This concise summary offers a brief overview of the products, highlighting their pros and cons and providing valuable insights. Each summary is crafted around the query, ensuring every search is unique and interesting.
+
+### 🔥 Semantic Cache
+
+We embed the generated results and queries to Weaviate, and use it as a `Semantic Cache`.
+This method is advantageous as it enables the demo to return results from queries that are semantically equal to the new query. For example `good for joint pain` and `helpful for joint pain` are semantically very similar and should return the same results, whereas `bad for joint pain` should have its own generated result. This method allows us to gain much more from generated results than traditional string matching would permit. It's a simple yet potent solution that enhances the efficiency of the search process.
+
 ## 🔧 Template
 
 This repository is designed to serve as a template - a starting point for your own projects with Weaviate. Take inspiration from how we've implemented certain features and feel free to enhance it in your own project. We welcome comments, ideas, and feedback. Embrace the open-source spirit!
