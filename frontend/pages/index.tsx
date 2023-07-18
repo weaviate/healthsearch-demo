@@ -21,6 +21,7 @@ export default function Home() {
 
     const [requests, setRequests] = useState<number>(0); // Number of requests
     const [cached, setCached] = useState<number>(0); // Number of cached results
+    const [cachedQueries, setCachedQueries] = useState<string[]>([]); // List of cached queries
 
     // State variable for generative search
     const [generativeResult, setGenerativeResult] = useState<string>(
@@ -38,6 +39,7 @@ export default function Home() {
                 setApiStatus('Online');
                 setRequests(responseData.requests);
                 setCached(responseData.cache_count);
+                setCachedQueries(responseData.cache_queries)
 
             } else {
                 setApiStatus('Offline');
@@ -124,6 +126,7 @@ export default function Home() {
                     isSidebarCollapsed={isSidebarCollapsed}
                     requests={requests}
                     cached={cached}
+                    cachedQueries={cachedQueries}
                 />
             </div>
             <div

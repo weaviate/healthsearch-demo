@@ -2,7 +2,7 @@
 
 Welcome to the Healthsearch Demo, an open-source project aimed at showcasing the potential of leveraging user-written reviews and queries to retrieve supplement products based on specific health effects. 
 
-[![Weaviate](https://img.shields.io/static/v1?label=%E2%9D%A4%20made%20with&message=Weaviate&color=green&style=flat-square)](https://weaviate.io/) [![Docker support](https://img.shields.io/badge/Docker_support-%E2%9C%93-4c1?style=flat-square&logo=docker&logoColor=white)](https://docs.docker.com/get-started/) [![Demo](https://img.shields.io/badge/Check%20out%20the%20demo!-blue?&style=flat-square&logo=react&logoColor=white)](https://healthsearch-frontend.onrender.com/) [![Weaviate](https://img.shields.io/static/v1?label=version&message=v1.0&color=pink&style=flat-square)](https://weaviate.io/)
+[![Weaviate](https://img.shields.io/static/v1?label=%E2%9D%A4%20made%20with&message=Weaviate&color=green&style=flat-square)](https://weaviate.io/) [![Docker support](https://img.shields.io/badge/Docker_support-%E2%9C%93-4c1?style=flat-square&logo=docker&logoColor=white)](https://docs.docker.com/get-started/) [![Demo](https://img.shields.io/badge/Check%20out%20the%20demo!-blue?&style=flat-square&logo=react&logoColor=white)](https://healthsearch-frontend.onrender.com/) [![Weaviate](https://img.shields.io/static/v1?label=version&message=v1.1&color=pink&style=flat-square)](https://weaviate.io/)
 
 ![Demo of Health Search](https://github.com/weaviate/healthsearch-demo/blob/main/frontend/public/Intro.gif)
 
@@ -11,6 +11,24 @@ Welcome to the Healthsearch Demo, an open-source project aimed at showcasing the
 The search functionality in this demo accepts natural language queries that are translated into GraphQL queries using LLMs. These GraphQL queries are then utilized to retrieve supplements from a Weaviate database. The demo also exhibits an example of generative search by providing product summaries generated based on the retrieved objects.
 
 > ⚠️ **Disclaimer**: Healthsearch is a technical demonstration, and the results shown should not be treated as health advice. The results and generated summaries are purely based on user-written reviews.
+
+### 💡 Natural Language Translation to GraphQL
+
+We use Large Language Models (LLM), like GPT4, to translate natural language queries into a structured query format, called a GraphQL query.
+The demo extracts information about filters, sorting, and limits directly from the context of the query. Whether the query is `the top 10 products for glowing skin`, `products for sleep from a specific brand`, or `best-rated products for toothache`, the demo can interpret these queries and generate an appropriate GraphQL query in return.
+
+### 🔎 Semantic Search
+
+Healthsearch relies on the power of semantic search in user reviews. When seeking products that are `good for joint pain`, for instance, Healthsearch scans user reviews for discussions on products that have alleviated joint pain or similar conditions. The results are then aggregated and grouped according to their respective products.
+
+### 💥 Generative Search
+
+After the translation of the query to GraphQL and the retrieval of the most semantically relevant product, we enhance our demo with a feature called `Generative Search`. Essentially, we examine the top five results and employ an LLM to generate a product summary. This concise summary offers a brief overview of the products, highlighting their pros and cons and providing valuable insights. Each summary is crafted around the query, ensuring every search is unique and interesting.
+
+### 🔥 Semantic Cache
+
+We embed the generated results and queries to Weaviate, and use it as a `Semantic Cache`.
+This method is advantageous as it enables the demo to return results from queries that are semantically equal to the new query. For example `good for joint pain` and `helpful for joint pain` are semantically very similar and should return the same results, whereas `bad for joint pain` should have its own generated result. This method allows us to gain much more from generated results than traditional string matching would permit. It's a simple yet potent solution that enhances the efficiency of the search process.
 
 ## 🔧 Template
 

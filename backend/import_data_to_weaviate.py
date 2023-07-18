@@ -122,8 +122,8 @@ def main(data_path: Path) -> None:
                 "name": "description",
                 "moduleConfig": {
                     "text2vec-openai": {
-                        "skip": False,
-                        "vectorizePropertyName": True,
+                        "skip": True,
+                        "vectorizePropertyName": False,
                     }
                 },
             },
@@ -150,7 +150,10 @@ def main(data_path: Path) -> None:
                 },
             },
         ],
-        "moduleConfig": {"generative-openai": {"model": "gpt-3.5-turbo"}},
+        "moduleConfig": {
+            "generative-openai": {"model": "gpt-3.5-turbo"},
+            "text2vec-openai": {"model": "ada", "modelVersion": "002", "type": "text"},
+        },
         "vectorizer": "text2vec-openai",
     }
 

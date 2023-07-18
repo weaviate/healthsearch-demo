@@ -201,9 +201,7 @@ You are a parser that understands the meaning of natural language queries and pa
 # FastAPI App
 app = FastAPI()
 
-origins = [
-    "http://localhost:3000",
-]
+origins = ["http://localhost:3000", "https://healthsearch-frontend.onrender.com"]
 
 # Add middleware for handling Cross Origin Resource Sharing (CORS)
 app.add_middleware(
@@ -226,25 +224,27 @@ def handle_results(results: dict) -> list:
         for key in data:
             query_results = data[key]["Product"]
             for query_result in query_results:
-                end_results.append(
-                    {
-                        "brand": query_result.get("brand", "No brand"),
-                        "name": query_result.get("name", "No name"),
-                        "rating": query_result.get("rating", 0.0),
-                        "ingredients": query_result.get("ingredients", ""),
-                        "description": query_result.get("description", ""),
-                        "summary": query_result.get("summary", ""),
-                        "effects": query_result.get("effects", ""),
-                        "reviews": query_result.get("reviews", []),
-                        "image": query_result.get("image", ""),
-                        "distance": round(
-                            query_result.get("_additional", {"distance": 0})[
-                                "distance"
-                            ],
-                            2,
-                        ),
-                    }
-                )
+                # Add hard filter
+                if len(query_result.get("reviews", [])) >= 5:
+                    end_results.append(
+                        {
+                            "brand": query_result.get("brand", "No brand"),
+                            "name": query_result.get("name", "No name"),
+                            "rating": query_result.get("rating", 0.0),
+                            "ingredients": query_result.get("ingredients", ""),
+                            "description": query_result.get("description", ""),
+                            "summary": query_result.get("summary", ""),
+                            "effects": query_result.get("effects", ""),
+                            "reviews": query_result.get("reviews", []),
+                            "image": query_result.get("image", ""),
+                            "distance": round(
+                                query_result.get("_additional", {"distance": 0})[
+                                    "distance"
+                                ],
+                                2,
+                            ),
+                        }
+                    )
         return end_results
 
     except Exception as e:
@@ -275,7 +275,7 @@ def get_cache(natural_query: str) -> dict:
     filter = {
         "path": ["naturalQuery"],
         "operator": "Equal",
-        "valueText": natural_query,
+        "valueText": str(natural_query),
     }
 
     results = (
@@ -286,16 +286,28 @@ def get_cache(natural_query: str) -> dict:
         .with_limit(1)
         .do()
     )
-    return results
+
+    if "errors" in results:
+        msg.warn(f"Error in get_cache: {results}")
+        return {"data": {"Get": {"CachedResult": []}}}
+
+    if results["data"]["Get"]["CachedResult"]:
+        if natural_query == results["data"]["Get"]["CachedResult"][0]["naturalQuery"]:
+            return results
+
+    return {"data": {"Get": {"CachedResult": []}}}
 
 
-def get_cache_count() -> None:
-    """Update the global cache count
-    @returns None
+def get_cache_count() -> list:
+    """Update the global cache count and return all cached queries
+    @returns list of queries
     """
-    global cache_count
     query = client.query.get("CachedResult", ["naturalQuery"]).do()
-    cache_count = len(query["data"]["Get"]["CachedResult"])
+    cachedQueries = [
+        naturalQuery["naturalQuery"]
+        for naturalQuery in query["data"]["Get"]["CachedResult"]
+    ]
+    return cachedQueries
 
 
 def check_cache(cache_results: dict, natural_query: str, max_distance: float) -> dict:
@@ -307,6 +319,10 @@ def check_cache(cache_results: dict, natural_query: str, max_distance: float) ->
     """
     if cache_results["data"]["Get"]["CachedResult"]:
         msg.good("Cache entry exists!")
+        cache_results["data"]["Get"]["CachedResult"][0]["summary"] = (
+            "🛰️ RETRIEVED FROM CACHE: "
+            + cache_results["data"]["Get"]["CachedResult"][0]["summary"]
+        )
         return cache_results
     else:
         msg.warn("Cache entry does not exist!")
@@ -332,6 +348,10 @@ def check_cache(cache_results: dict, natural_query: str, max_distance: float) ->
         else:
             msg.good(
                 f'Retrieved similar results (distance {results["data"]["Get"]["CachedResult"][0]["_additional"]["distance"]})'
+            )
+            results["data"]["Get"]["CachedResult"][0]["summary"] = (
+                f"⭐ RETURNED SIMILAR CACHED RESULTS FROM QUERY '{results['data']['Get']['CachedResult'][0]['naturalQuery']}' ({round(results['data']['Get']['CachedResult'][0]['_additional']['distance'],2)}) : "
+                + results["data"]["Get"]["CachedResult"][0]["summary"]
             )
             return results
 
@@ -456,22 +476,27 @@ class NLQuery(BaseModel):
 # Define health check endpoint
 @app.get("/health")
 async def root():
+    global cache_count
+
     try:
-        client.schema.get()
-        get_cache_count()
+        cached_queries = get_cache_count()
+        cache_count = len(cached_queries)
         return JSONResponse(
             content={
                 "message": "Alive!",
                 "requests": request_count,
                 "cache_count": cache_count,
+                "cache_queries": cached_queries,
             }
         )
-    except:
+    except Exception as e:
+        msg.fail(f"Healthcheck failed with {str(e)}")
         return JSONResponse(
             content={
                 "message": "Database connection failed!",
                 "requests": request_count,
                 "cache_count": cache_count,
+                "cache_queries": [],
             },
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
         )
@@ -486,10 +511,12 @@ async def generate_query(payload: NLQuery):
     """
     global request_count
     request_count += 1
-    start_prompt = f"Convert this natural language to a GraphQL Query and only return the query, it will be directly used: {payload.text}"
+    query_text = payload.text.strip().lower()
+
+    start_prompt = f"Convert this natural language to a GraphQL Query and only return the query, it will be directly used: {query_text}"
 
     # Easter Egg
-    if payload.text.lower() == "easteregg":
+    if query_text == "easteregg":
         return JSONResponse(
             content={
                 "query": "🚀 Congratulations, you rolled the demo!",
@@ -499,7 +526,7 @@ async def generate_query(payload: NLQuery):
         )
 
     # Cache Retrieval
-    results = check_cache(get_cache(payload.text.lower()), payload.text.lower(), 0.14)
+    results = check_cache(get_cache(query_text), query_text, 0.14)
 
     if len(results) > 0:
         products = json.loads(results["data"]["Get"]["CachedResult"][0]["products"])
@@ -554,9 +581,7 @@ async def generate_query(payload: NLQuery):
 
                 results = handle_results(results)  # type: ignore[assignment]
 
-                generative_query = modify_graphql(
-                    str(content), payload.text, data_fields
-                )
+                generative_query = modify_graphql(str(content), query_text, data_fields)
                 generative_results = client.query.raw(str(generative_query))
 
                 if "errors" in generative_results:
@@ -584,7 +609,7 @@ async def generate_query(payload: NLQuery):
                     )
 
                 add_cache(
-                    payload.text.lower(),
+                    query_text,
                     "".join(
                         [
                             str(content) + "\n\n",
@@ -606,7 +631,7 @@ async def generate_query(payload: NLQuery):
                             ]
                         ),
                         "results": results,
-                        "generative_summary": generative_summary,
+                        "generative_summary": "✨ GENERATED: " + generative_summary,
                     }
                 )
 
