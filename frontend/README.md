@@ -44,7 +44,7 @@ export interface Product {
 }
 ```
 
-## 🔗 Code Maintanance
+## 🔗 Code Maintenance
 
 - Run `npx prettier --write .` to format the codebase.
 - Lint the codebase with `npx eslint <FILENAME>`.
