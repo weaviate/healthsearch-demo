@@ -20,3 +20,4 @@ _archive
 key
 data_generation
 count_data.py
+get_vectors.py
