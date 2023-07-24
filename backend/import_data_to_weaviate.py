@@ -16,7 +16,7 @@ def main(data_path: Path) -> None:
 
     # Connect to Weaviate
     url = os.environ.get("HEALTHSEARCH_SERVER", "")
-    openai_key = os.environ.get("OPENAIO_API_KEY", "")
+    openai_key = os.environ.get("OPENAI_API_KEY", "")
     auth_config = weaviate.AuthApiKey(
         api_key=os.environ.get("HEALTHSEARCH_API_KEY", "")
     )
