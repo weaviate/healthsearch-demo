@@ -39,8 +39,7 @@ export default function Home() {
                 setApiStatus('Online');
                 setRequests(responseData.requests);
                 setCached(responseData.cache_count);
-                setCachedQueries(responseData.cache_queries)
-
+                setCachedQueries(responseData.cache_queries);
             } else {
                 setApiStatus('Offline');
             }
@@ -101,7 +100,13 @@ export default function Home() {
                     <div className="bg-black text-white lg:p-6 md:p-3 sm:p-3 rounded shadow-lg text-center border-2 border-dashed border-yellow-500 lg:w-2/6 md:1/2 sm:1/2 sm:mx-3">
                         <h2 className="lg:text-2xl mb-4">⚠️ Please note</h2>
                         <p className="mb-6">
-                            Healthsearch is NOT intended to give any health advice. All results are purely based on the content of user-written reviews. Healthsearch is a technical demonstration that presents a proof of concept for one of many usecases with Weaviate. Please ask a medical professional before taking any supplements for your condition.
+                            Healthsearch is NOT intended to give any health
+                            advice. All results are purely based on the content
+                            of user-written reviews. Healthsearch is a technical
+                            demonstration that presents a proof of concept for
+                            one of many usecases with Weaviate. Please ask a
+                            medical professional before taking any supplements
+                            for your condition.
                         </p>
                         <button
                             onClick={() => setIsModalOpen(false)}
@@ -113,8 +118,9 @@ export default function Home() {
                 </div>
             )}
             <div
-                className={`flex-shrink-0 ${isSidebarCollapsed ? 'sm:w-0 md:w-0' : 'sm:w-1/3 w-full'
-                    } transition-width duration-200`}
+                className={`flex-shrink-0 ${
+                    isSidebarCollapsed ? 'sm:w-0 md:w-0' : 'sm:w-1/3 w-full'
+                } transition-width duration-200`}
             >
                 <SidebarCard
                     onSend={handleSend}
@@ -130,8 +136,9 @@ export default function Home() {
                 />
             </div>
             <div
-                className={`flex-grow lg:w-2/3 min-h-screen overflow-y-auto ${isSidebarCollapsed ? 'block' : 'hidden'
-                    } lg:block`}
+                className={`flex-grow lg:w-2/3 min-h-screen overflow-y-auto ${
+                    isSidebarCollapsed ? 'block' : 'hidden'
+                } lg:block`}
                 style={{
                     backgroundImage: "url('/background.png')",
                     backgroundSize: 'cover',
@@ -163,8 +170,9 @@ export default function Home() {
             </div>
             <button
                 onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-                className={`fixed top-1/2 transform -translate-y-1/2 z-10 bg-zinc-500 text-white font-mono text-sm p-2 rounded-full transition-transform duration-200 ease-in-out hover:scale-105 lg:hidden hover:bg-green-500 ${isSidebarCollapsed ? 'left-0 ml-4' : 'right-0 mr-4'
-                    }`}
+                className={`fixed top-1/2 transform -translate-y-1/2 z-10 bg-zinc-500 text-white font-mono text-sm p-2 rounded-full transition-transform duration-200 ease-in-out hover:scale-105 lg:hidden hover:bg-green-500 ${
+                    isSidebarCollapsed ? 'left-0 ml-4' : 'right-0 mr-4'
+                }`}
             >
                 {isSidebarCollapsed ? <FaAngleLeft /> : <FaAngleRight />}
             </button>

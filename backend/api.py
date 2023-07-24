@@ -32,7 +32,9 @@ data_fields = [
     "effects",
 ]
 
-model_name = "gpt-4"  # default (gpt-4)
+model_name = (
+    "gpt-4"  # default (gpt-4), change to (gpt-3.5-turbo) if you don't have access
+)
 
 # Define OpenAI API key, Weaviate URL, and auth configuration
 openai.api_key = os.environ.get("OPENAI_API_KEY", "")

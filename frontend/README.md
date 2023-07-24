@@ -20,10 +20,12 @@ Inside the frontend folder, use these commands:
 0. **(Optional)** Adjust the backend endpoint in the `index.tsx` file according to your setup (default is localhost:8000).
 
 1. **Build the docker image with**
--  `docker build -t healthsearch-frontend .`
+
+-   `docker build -t healthsearch-frontend .`
 
 2. **Run the docker with**
-- `docker run -p 3000:3000 healthsearch-frontend`
+
+-   `docker run -p 3000:3000 healthsearch-frontend`
 
 ## 🔗 Product Schema
 
@@ -46,8 +48,8 @@ export interface Product {
 
 ## 🔗 Code Maintenance
 
-- Run `npx prettier --write .` to format the codebase.
-- Lint the codebase with `npx eslint <FILENAME>`.
+-   Run `npx prettier --write .` to format the codebase.
+-   Lint the codebase with `npx eslint <FILENAME>`.
 
 ## 🎨 Styling
 
@@ -57,26 +59,26 @@ The application employs Tailwind CSS and global CSS classes for styling. Images 
 
 Below is a brief description of the key components:
 
-- `index.tsx`
-Contains a Sidebar for inputting and managing queries, a Main Content area for displaying results, and a Modal for disclaimers. The layout is responsive, with a collapsible sidebar for smaller screens.
+-   `index.tsx`
+    Contains a Sidebar for inputting and managing queries, a Main Content area for displaying results, and a Modal for disclaimers. The layout is responsive, with a collapsible sidebar for smaller screens.
 
-- `SideBarCard.tsx`
-A collapsible sidebar that displays instructions, a console for sending queries (ConsoleCard), a transformed query display (QueryCard), and detailed product info when a product is selected (ProductDetailsCard).
+-   `SideBarCard.tsx`
+    A collapsible sidebar that displays instructions, a console for sending queries (ConsoleCard), a transformed query display (QueryCard), and detailed product info when a product is selected (ProductDetailsCard).
 
-- `ConsoleCard.tsx`
-Accepts a user query, displays search suggestions, and provides tooltip instructions. When a query is sent, it communicates with the parent component using the onSend function.
+-   `ConsoleCard.tsx`
+    Accepts a user query, displays search suggestions, and provides tooltip instructions. When a query is sent, it communicates with the parent component using the onSend function.
 
-- `QueryCard.tsx`
-Displays the transformed GraphQL query from user input in a stylized card format with syntax highlighting and interactive features like a tooltip for guidance and a copy-to-clipboard function.
+-   `QueryCard.tsx`
+    Displays the transformed GraphQL query from user input in a stylized card format with syntax highlighting and interactive features like a tooltip for guidance and a copy-to-clipboard function.
 
-- `ProductDetailsCard.tsx`
-Presents detailed product information interactively, with parsed reviews differentiated from standard text.
+-   `ProductDetailsCard.tsx`
+    Presents detailed product information interactively, with parsed reviews differentiated from standard text.
 
-- `GenerativeCard.tsx`
-Shows generated product summaries using a typewriter effect and a loading spinner while waiting for fetched results.
+-   `GenerativeCard.tsx`
+    Shows generated product summaries using a typewriter effect and a loading spinner while waiting for fetched results.
 
-- `ResultsCard.tsx`
-Creates a responsive grid of ProductCards, with a variable number of products per row depending on window width.
+-   `ResultsCard.tsx`
+    Creates a responsive grid of ProductCards, with a variable number of products per row depending on window width.
 
-- `ProductCard.tsx`
-Displays products as cards with details and a typewriter-effect review summary. If no product image is available, it uses a placeholder icon.
+-   `ProductCard.tsx`
+    Displays products as cards with details and a typewriter-effect review summary. If no product image is available, it uses a placeholder icon.

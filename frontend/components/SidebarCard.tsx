@@ -17,7 +17,7 @@ interface SidebarCardProps {
     isSidebarCollapsed: boolean;
     requests: number;
     cached: number;
-    cachedQueries: string[],
+    cachedQueries: string[];
 }
 
 // Define the SidebarCard functional component
@@ -31,7 +31,7 @@ const SidebarCard: React.FC<SidebarCardProps> = ({
     isSidebarCollapsed,
     requests,
     cached,
-    cachedQueries
+    cachedQueries,
 }) => {
     // Styles for the global scrollbar
     const scrollBarStyles = `
@@ -81,11 +81,29 @@ const SidebarCard: React.FC<SidebarCardProps> = ({
                                 />
                             </div>
                             <div className="flex justify-center my-2">
-                                <a className='cursor-pointer transform transition duration-500 ease-in-out hover:scale-150' href="https://www.weaviate.io" target="_blank" rel="noreferrer">
-                                    <img src="/weaviate-icon.png" alt="Weaviate" className="w-8 h-8 mx-2 cursor-pointer" />
+                                <a
+                                    className="cursor-pointer transform transition duration-500 ease-in-out hover:scale-150"
+                                    href="https://www.weaviate.io"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    <img
+                                        src="/weaviate-icon.png"
+                                        alt="Weaviate"
+                                        className="w-8 h-8 mx-2 cursor-pointer"
+                                    />
                                 </a>
-                                <a className='cursor-pointer transform transition duration-500 ease-in-out hover:scale-150' href="https://github.com/weaviate/healthsearch-demo" target="_blank" rel="noreferrer">
-                                    <img src="/github-icon.png" alt="Github" className="w-8 h-8 mx-2 cursor-pointer" />
+                                <a
+                                    className="cursor-pointer transform transition duration-500 ease-in-out hover:scale-150"
+                                    href="https://github.com/weaviate/healthsearch-demo"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    <img
+                                        src="/github-icon.png"
+                                        alt="Github"
+                                        className="w-8 h-8 mx-2 cursor-pointer"
+                                    />
                                 </a>
                             </div>
                             {/* Welcome message and instructions */}
@@ -93,11 +111,23 @@ const SidebarCard: React.FC<SidebarCardProps> = ({
                                 <div className="w-full lg:w-full md:w-3/4 sm:w-1/2">
                                     <p className="text-sm font-mono bg-black bg-opacity-10 p-3 shadow-lg rounded-lg">
                                         {' '}
-                                        Welcome to Healthsearch! Convert natural language to a GraphQL query to search for supplements with specific health effects based on user-written reviews. The demo uses generative search to further enhance the results by providing product and review summaries.
+                                        Welcome to Healthsearch! Convert natural
+                                        language to a GraphQL query to search
+                                        for supplements with specific health
+                                        effects based on user-written reviews.
+                                        The demo uses generative search to
+                                        further enhance the results by providing
+                                        product and review summaries.
                                     </p>
                                     {/* Disclaimer */}
                                     <p className="text-xs text-slate-400 hover:text-white mt-2 font-mono bg-black bg-opacity-10 border-2 border-dashed border-zinc-600 table-container hover:border-yellow-400 p-3 shadow-lg rounded-lg">
-                                        Healthsearch is NOT intended to give any health advice, all results are purely based on user-written reviews. Healthsearch is a technical demonstration and presents a proof of concept for one of many possible usecases for Weaviate.
+                                        Healthsearch is NOT intended to give any
+                                        health advice, all results are purely
+                                        based on user-written reviews.
+                                        Healthsearch is a technical
+                                        demonstration and presents a proof of
+                                        concept for one of many possible
+                                        usecases for Weaviate.
                                     </p>
                                 </div>
                                 {/* Display API and version status */}
@@ -106,10 +136,11 @@ const SidebarCard: React.FC<SidebarCardProps> = ({
                                         Powered by Weaviate
                                     </span>
                                     <span
-                                        className={`rounded-indicator text-white ${apiStatus === 'Online'
-                                            ? 'neon-text'
-                                            : 'bg-red-500'
-                                            }`}
+                                        className={`rounded-indicator text-white ${
+                                            apiStatus === 'Online'
+                                                ? 'neon-text'
+                                                : 'bg-red-500'
+                                        }`}
                                     >
                                         Demo {apiStatus}
                                     </span>
@@ -121,7 +152,11 @@ const SidebarCard: React.FC<SidebarCardProps> = ({
                         </div>
                     </div>
                     {/* ConsoleCard for sending queries */}
-                    <ConsoleCard onSend={onSend} loading={loading} cachedQueries={cachedQueries} />
+                    <ConsoleCard
+                        onSend={onSend}
+                        loading={loading}
+                        cachedQueries={cachedQueries}
+                    />
                     {/* QueryCard for displaying transformed query */}
                     <QueryCard transformedQuery={transformedQuery} />
                 </>
@@ -130,7 +165,9 @@ const SidebarCard: React.FC<SidebarCardProps> = ({
                 <ProductDetailsCard product={selectedProduct} onBack={onBack} />
             )}
             <div className="my-4 text-xs text-white font-mono flex justify-center">
-                <span className='rounded-indicator neon-text'>Total Requests: {requests}</span>
+                <span className="rounded-indicator neon-text">
+                    Total Requests: {requests}
+                </span>
             </div>
         </div>
     );

@@ -1,8 +1,8 @@
 FROM python:3.8
 
-WORKDIR /Backend
+WORKDIR /backend
 
-COPY . /Backend
+COPY . /backend
 
 RUN pip install --no-cache-dir -r requirements.txt
 

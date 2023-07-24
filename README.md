@@ -34,6 +34,20 @@ This method is advantageous as it enables the demo to return results from querie
 
 This repository is designed to serve as a template - a starting point for your own projects with Weaviate. Take inspiration from how we've implemented certain features and feel free to enhance it in your own project. We welcome comments, ideas, and feedback. Embrace the open-source spirit!
 
+## 💰 Language Learning Model (LLM) Costs
+
+This demonstration primarily uses OpenAI models for embedding supplement products, processing user queries, and generating summaries. By default, any costs associated with using these services will be billed to the access key that you provide.
+
+If you prefer, you can replace the OpenAI models with any other Language Learning Model (LLM) provider. However, please be aware that completely changing the API will require further adjustments to the code.
+
+Below, we provide a rough estimate of the costs involved in importing data to Weaviate. For a comprehensive understanding, please visit OpenAI's pricing page at https://openai.com/pricing.
+
+### Data Embedding Costs
+We employ the Ada v2 model for embedding data into the Weaviate cluster. At the time of writing this README, the model costs $0.0001 for every 1k tokens (note that approximately [4 characters equal 1 token](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them)). As a rough approximation, importing the dataset to Weaviate might cost around $0.002.
+
+### Query Construction and Summary Generation Costs
+We use the GPT-4 model for building GraphQL queries and generating summaries. As of the time of writing this README, this model costs $0.03/1k tokens for input and $0.06/1k tokens for output. The exact costs are dependent on the user query and the results returned by the GraphQL query. Please take these factors into account when calculating your expected costs. You can also change the `model_name` variable to `gpt-3.5-turbo` inside the `api.py` script in the backend folder. The GPT-3 model costs $0.0015/1k tokens for input and $0.002/1k tokens for output.
+
 ## 🛠️ Project Structure
 
 The Healthsearch Demo is structured in three main components:
@@ -52,7 +66,7 @@ You can use Docker to setup the demo in one line of code! If you're not familiar
 - The following environment variables need to be set
 - ```OPENAI_API_KEY=your-openai-api-key```
 > Use the `.env` file inside the backend folder to set the variable (https://github.com/theskumar/python-dotenv)
-> Note that if you're using the GPT-4 model (by default), ensure your OpenAI key has access.
+> Note that if you're using the GPT-4 model (by default), ensure your OpenAI key has access. You can change the `model_name` variable to `gpt-3.5-turbo` inside the `api.py` script.
 
 1. **Use docker compose**
 -  `docker-compose up`

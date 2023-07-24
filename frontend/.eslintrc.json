@@ -3,10 +3,7 @@
         "react": {
             "version": "detect"
         },
-        "import/core-modules": [
-            "styled-jsx",
-            "styled-jsx/css"
-        ]
+        "import/core-modules": ["styled-jsx", "styled-jsx/css"]
     },
     "env": {
         "browser": true,
@@ -22,10 +19,7 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": [
-        "@typescript-eslint",
-        "react"
-    ],
+    "plugins": ["@typescript-eslint", "react"],
     "rules": {
         "react/react-in-jsx-scope": "off"
     }

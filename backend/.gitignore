@@ -19,3 +19,4 @@ _archive
 .mypy_cache
 key
 data_generation
+count_data.py

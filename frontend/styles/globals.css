@@ -80,15 +80,17 @@
 }
 
 .neon-text {
-    background: linear-gradient(-45deg,
-            #ff0000,
-            #ff7f00,
-            #ffff00,
-            #00ff00,
-            #00ffff,
-            #0000ff,
-            #8b00ff,
-            #ff0000);
+    background: linear-gradient(
+        -45deg,
+        #ff0000,
+        #ff7f00,
+        #ffff00,
+        #00ff00,
+        #00ffff,
+        #0000ff,
+        #8b00ff,
+        #ff0000
+    );
     background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

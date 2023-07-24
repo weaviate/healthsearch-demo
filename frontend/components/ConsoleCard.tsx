@@ -10,7 +10,11 @@ interface ConsoleCardProps {
 }
 
 // Define the ConsoleCard functional component
-const ConsoleCard: React.FC<ConsoleCardProps> = ({ onSend, loading, cachedQueries }) => {
+const ConsoleCard: React.FC<ConsoleCardProps> = ({
+    onSend,
+    loading,
+    cachedQueries,
+}) => {
     // Define state variables for tooltip visibility and input value
     const [showTooltip, setShowTooltip] = useState(false);
     const [inputValue, setInputValue] = useState('');
@@ -52,7 +56,7 @@ const ConsoleCard: React.FC<ConsoleCardProps> = ({ onSend, loading, cachedQuerie
             }
             setFade('fade-in');
         }, 250);
-    }
+    };
 
     // Function to handle right navigation
     const handleRightNav = () => {
@@ -65,7 +69,7 @@ const ConsoleCard: React.FC<ConsoleCardProps> = ({ onSend, loading, cachedQuerie
             }
             setFade('fade-in');
         }, 250);
-    }
+    };
 
     return (
         <div className="animate-pop-in">
@@ -104,15 +108,17 @@ const ConsoleCard: React.FC<ConsoleCardProps> = ({ onSend, loading, cachedQuerie
                         >
                             <FaArrowLeft />
                         </button>
-                        {allSuggestions.slice(currentIndex, currentIndex + 3).map((suggestion, index) => (
-                            <button
-                                key={index}
-                                onClick={() => setInputValue(suggestion)}
-                                className={`bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold py-1 px-2 rounded-md ${fade}`}
-                            >
-                                {suggestion}
-                            </button>
-                        ))}
+                        {allSuggestions
+                            .slice(currentIndex, currentIndex + 3)
+                            .map((suggestion, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setInputValue(suggestion)}
+                                    className={`bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold py-1 px-2 rounded-md ${fade}`}
+                                >
+                                    {suggestion}
+                                </button>
+                            ))}
                         <button
                             onClick={handleRightNav}
                             className="bg-slate-700 hover:bg-green-500 text-white text-xs font-semibold py-1 px-2 rounded-md transition duration-500 ease-in-out"
@@ -137,11 +143,11 @@ const ConsoleCard: React.FC<ConsoleCardProps> = ({ onSend, loading, cachedQuerie
                         {/* Tooltip */}
                         {showTooltip && (
                             <div className="absolute bottom-full left-0 text-xs bg-slate-700 text-white font-mono p-3 w-60 rounded z-50 mb-2 shadow-lg">
-                                Search for products with specific health
-                                effects based on user-written reviews. Press Generate to create a GraphQL
-                                Query. Use the generated query to retrieve a
-                                list of products, which you can select for more
-                                information.
+                                Search for products with specific health effects
+                                based on user-written reviews. Press Generate to
+                                create a GraphQL Query. Use the generated query
+                                to retrieve a list of products, which you can
+                                select for more information.
                             </div>
                         )}
                     </div>
