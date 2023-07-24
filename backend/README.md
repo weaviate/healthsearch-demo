@@ -4,7 +4,7 @@ Welcome to the backend documentation for the Healthsearch Demo, designed to guid
 
 ## 🗂️ Dataset
 
-The [`dataset_100_supplements.json`](./data/dataset_100_supplements.json) file contained in the `data` folder is an extract of the original dataset and intended to be imported into a Weaviate Cluster. This file serves as the primary data source for the open-source demo, featuring product reviews, ratings, and health-related benefits of various supplements.
+Both files [`dataset_100_supplements.json`](./data/dataset_100_supplements.json) and [`dataset_100_supplements_with_vectors.json`](./data/dataset_100_supplements.json) contained in the `data` folder are an extract of the original dataset and intended to be imported into a Weaviate Cluster. These file serves as the primary data source for the open-source demo, featuring product reviews, ratings, and health-related benefits of various supplements. The [`dataset_100_supplements_with_vectors.json`](./data/dataset_100_supplements.json) already contains pre-generated vectors so that they can be imported directly to Weaviate. 
 
 The backend expects the data to be in this format:
 
@@ -87,8 +87,9 @@ The following steps guide you through setting up the backend manually
 - ```pip install -r requirements.txt```
 
 5. **Import dataset:**
-- Use the provided script to import the dataset into Weaviate: `python import_data_to_weaviate.py ./data/dataset_100_supplements.json`. If you wish to use your own dataset, ensure it matches the provided schema and adjust the API and Frontend accordingly.
+- Use the provided script to import the dataset into Weaviate: `python import_data_to_weaviate.py ./data/dataset_100_supplements_with_vectors.json`. If you wish to use your own dataset, ensure it matches the provided schema and adjust the API and Frontend accordingly.
 > Note: The import script also deletes all classes if they already exist. This is handy for starting from scratch, but if you wish to append entries, a custom data ingestion script would be needed. More on this can be found [here](https://weaviate.io/developers/weaviate/manage-data/import).
+> Since the dataset already contains vectors, no embedding will be generated and your OpenAI Key won't be billed.
 
 6. **Start the FastAPI app:**
 - ```uvicorn api:app --reload --host 0.0.0.0 --port 8000```

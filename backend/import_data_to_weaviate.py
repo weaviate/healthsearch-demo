@@ -21,10 +21,9 @@ def main(data_path: Path) -> None:
         api_key=os.environ.get("HEALTHSEARCH_API_KEY", "")
     )
 
-    if openai_key == "" or url == "":
+    if url == "":
         msg.fail("Environment Variables not set.")
         msg.info(f"URL: {url}")
-        msg.info(f"OPENAI API KEY: {openai_key}")
         return
 
     client = weaviate.Client(
@@ -186,7 +185,13 @@ def main(data_path: Path) -> None:
                 "summary": data[d].get("summary", "Review summary"),
             }
 
-            client.batch.add_data_object(properties, "Product")
+            # Check if vector exists in dataset
+            if "vector" in data[d]:
+                client.batch.add_data_object(
+                    properties, "Product", vector=data[d]["vector"]
+                )
+            else:
+                client.batch.add_data_object(properties, "Product")
 
     msg.good("Data imported")
     msg.divider("Starting to initialize Cache")
